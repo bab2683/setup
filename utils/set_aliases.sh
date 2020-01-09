@@ -41,8 +41,11 @@ function copy_contents(){
 	fi
 	cat $1 >> $2
 	echo "All aliases have been saved in ${2}"
-	source $2
+	echo -e "Don't forget to run this command: ${YELLOW}source ${2} ${RESET_COLOR}to apply the new changes"	
 }
+
+YELLOW='\033[1;33m'
+RESET_COLOR='\033[0m'
 
 HOME_DIR="$(eval echo ~$USER)"
 FILE_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
