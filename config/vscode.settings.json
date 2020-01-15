@@ -1,0 +1,30 @@
+{
+  "editor.wordWrap": "on",
+  "editor.tabCompletion": "on",
+  "editor.insertSpaces": false,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 4,
+  "window.zoomLevel": 0,
+  "editor.formatOnSave": true,
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "[yaml]": {
+    "editor.formatOnSave": false
+  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.build": true,
+    "**/coverage": true,
+    "**/dist-desktop": true,
+    "**/dist-mobile": true,
+    "**/e2e": true
+  },
+  "typescript.extension.sortImports.sortOnSave": false,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "typescript.updateImportsOnFileMove.enabled": "never"
+}
