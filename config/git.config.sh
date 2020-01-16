@@ -1,6 +1,4 @@
-# ----------------------
-# Git configuration
-# ----------------------
+####  Git configuration Start  ####
 
 # Show branch name in terminal
 parse_git_branch(){
@@ -38,8 +36,11 @@ alias gdb='git branch -D'
 __git_complete gdelb _git_checkout
 # Rebasing
 alias grr='git rebase -r'
+__git_complete grr _git_checkout
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 # Pushing
 alias gpu='git push'
 alias gpuf='git push -f'
+
+####  Git configuration End  ####

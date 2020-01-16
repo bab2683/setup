@@ -1,45 +1,53 @@
 # Params:
 # 1: File path
-# 2: Filename
-# 3: Target Directory
-# 4: Callback
-# 5: Callback parameters
-function check_and_create_file(){
-	if ! test -f "$1"; then
-		echo "$2 is not present, do you want to create it?"
-		select yn in "Yes" "No"; do
-			case $yn in
-				Yes ) create_file $3 $2; check_and_execute_command $4 $5 $1 true; break;;
-				No ) break;;
-			esac	
-		done
+function file_exists {
+	if test -f "$1"; then
+		echo true
 	else
-		check_and_execute_command $4 $5 $1
-	fi	
-}
-
-function create_file(){
-	$(cd $1 && touch $2)
-	echo "${1}/${2} created"
-}
-
-function check_and_execute_command() {
-	command=$1
-	shift
-	if ! test -z "$command"; then
-		"${command}" "$@"
+		echo false
 	fi
 }
+
+# Params:
+# 1: File path
+# 2: Filename
+function create_file(){
+	$(cd $1 && touch $2)	
+}
+
 # Params:
 # 1: Origin file
 # 2: Target file
 # 3: Is new
 function copy_contents(){
-	if test -z "$3"; then
+	if ! $3; then
 		echo "" >> "$2"
 		echo "" >> "$2"
 	fi
 	cat $1 >> $2
-	echo "All aliases have been saved in ${2}"
-	echo -e "Don't forget to run this command: $(colorize RED_BG source) to apply the new changes"	
 }
+
+# Params:
+# 1: String to search
+# 2: File path
+function string_in_file() {
+	local result=$(grep -F "$1" "$2" >/dev/null; echo $?)
+	echo $result
+}
+
+# Params:
+# 1: String to search
+# 2: File path
+function get_line_in_file() { 
+	echo "$(grep -n "$1" "$2" | head -n 1 | cut -d: -f1)"
+}
+
+# Params:
+# 1: Start line number
+# 2: Finish line number
+# 3: File path
+function delete_content_in_range () {
+	local FILE_WITHOUT_CONFIG=$(sed -e "${1},${2}d" "$3")
+	echo "$FILE_WITHOUT_CONFIG" > $3
+}
+
