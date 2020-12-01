@@ -34,6 +34,7 @@ alias gb='git checkout -b'
 alias grb='git branch -m'
 alias gdb='git branch -D'
 __git_complete gdelb _git_checkout
+alias gdab='git branch | egrep -v "(master|\*)" | xargs git branch -D'
 # Rebasing
 alias grr='git rebase -r'
 __git_complete grr _git_checkout
